@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import styled from 'styled-components';
 import Hero from '../components/Hero';
 import StdCta from '../components/StdCta';
@@ -24,6 +25,9 @@ const StyledHomePage = styled.div`
 function HomePage() {
   return (
     <StyledHomePage>
+      <Head>
+        <title>We're getting married!</title>
+      </Head>
       <div className="cta">
         <StdCta />
       </div>

@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import styled from 'styled-components';
 
 const StyledStayPage = styled.div`
@@ -17,6 +18,9 @@ const StyledStayPage = styled.div`
 function StayPage() {
   return (
     <StyledStayPage>
+      <Head>
+        <title>Lodging</title>
+      </Head>
       <h1>Where to Stay</h1>
       <p>
         We have blocks of rooms reserved at a couple hotels nearby in Owego, NY:
