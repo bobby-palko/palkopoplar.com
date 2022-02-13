@@ -7,7 +7,7 @@ const StyledHeader = styled.div`
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   align-items: center;
   @media (max-width: 650px) {
-    a {
+    div {
       text-align: center;
     }
     justify-content: center;

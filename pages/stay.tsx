@@ -30,7 +30,7 @@ function StayPage() {
           >
             Hampton Inn
           </a>{' '}
-          - $129
+          - $149
           <br />
           1030 Route 17C
           <br />
@@ -46,7 +46,7 @@ function StayPage() {
           >
             Best Western
           </a>{' '}
-          - $169
+          - $109
           <br />
           20 Hickories Park Road
           <br />
