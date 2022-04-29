@@ -16,7 +16,7 @@ function StdCta() {
       <p>
         September 24th, 2022
         <br />
-        Ithica Farmer's Market, Ithica, NY
+        Ithaca Farmer's Market, Ithaca, NY
         <br />
         Already know you're coming?{' '}
         <Link href="/stay">Book your stay now!</Link>

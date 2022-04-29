@@ -1,6 +1,9 @@
 {
-  "name": "palkopoplar.com",
-  "private": true,
+  "name": "palkopoplar.com",  
+  "version": "1.1.0",
+  "description": "A website for my wedding",
+  "author": "Bobby Palko",
+  "license": "MIT",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
