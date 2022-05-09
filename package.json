@@ -1,5 +1,5 @@
 {
-  "name": "palkopoplar.com",  
+  "name": "palkopoplar.com",
   "version": "1.1.0",
   "description": "A website for my wedding",
   "author": "Bobby Palko",
@@ -14,6 +14,7 @@
     "next": "12.1.0",
     "react": "17.0.2",
     "react-dom": "17.0.2",
+    "react-modal": "^3.15.1",
     "styled-components": "^5.3.3"
   },
   "devDependencies": {
