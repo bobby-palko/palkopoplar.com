@@ -12,7 +12,12 @@ function handler(req: NextApiRequest, res: NextApiResponse) {
   // in the command line where next.js app is running.
   console.log('body: ', body);
 
-  res.status(200).json({ data: body.name as string });
+  // TODO search for name in db and return PIN
+
+  // !temp just returns an ID between 1 and 10
+  const partyId = Math.floor(Math.random() * 10) + 1;
+
+  res.status(200).json({ partyId });
 }
 
 export default handler;
