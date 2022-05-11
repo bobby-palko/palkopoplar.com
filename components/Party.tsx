@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const PartyModal = styled.div`
+const StyledParty = styled.div`
   width: 100%;
   height: 100%;
   background-color: var(--pink);
@@ -12,9 +12,9 @@ const PartyModal = styled.div`
 
 function Party({ id, pathname }) {
   return (
-    <PartyModal>
+    <StyledParty>
       I am the party {id}; my pathname is: {pathname}
-    </PartyModal>
+    </StyledParty>
   );
 }
 
