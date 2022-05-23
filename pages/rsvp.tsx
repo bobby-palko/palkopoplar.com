@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import Modal from 'react-modal';
 import { useRouter } from 'next/router';
-import { FormEvent } from 'react';
+import { FormEvent, useState } from 'react';
 import Party from '../components/Party';
 
 Modal.setAppElement('#modal');
@@ -9,49 +9,59 @@ Modal.setAppElement('#modal');
 const ModalOverlay = {
   overlay: {
     backgroundColor: `rgba(0,0,0,0.5)`,
+    display: `flex`,
+    alignItems: `center`,
+    justifyContent: `center`,
   },
   content: {
-    backgroundColor: `red`,
+    backgroundColor: `var(--cream)`,
+    border: `none`,
+    borderRadius: `7%`,
+    padding: `0`,
+    inset: `10% 25%`,
   },
+};
+
+export interface RSVPForm {
+  name: string;
+}
+
+const blankForm: RSVPForm = {
+  name: '',
 };
 
 function RSVPPage() {
   const router = useRouter();
+  const [name, setName] = useState('');
+  const [submittedForm, hasSubmittedForm] = useState(false);
+  const [formData, setFormData] = useState(blankForm);
 
-  const handleSubmit = async (event: FormEvent) => {
+  interface UpdateNameProps {
+    target: {
+      value: string;
+    };
+  }
+
+  const updateName = ({ target: { value } }: UpdateNameProps) => {
+    setName(value);
+  };
+
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     // prevent navigating to api/ and refreshing
     event.preventDefault();
 
-    // grab data
-    const data = {
-      name: event.target.name.value,
+    // grab data from form
+    const data: RSVPForm = {
+      name,
     };
+    setFormData(data);
+    hasSubmittedForm(true);
+  };
 
-    const JSONdata = JSON.stringify(data);
-
-    const endpoint = '/api/rsvp';
-
-    const options = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSONdata,
-    };
-
-    const response = await fetch(endpoint, options);
-
-    const result = await response.json();
-
-    router.push(
-      {
-        pathname: '/rsvp',
-        query: {
-          partyId: result.partyId,
-        },
-      },
-      '/rsvp'
-    );
+  const handleClose = () => {
+    setFormData(blankForm);
+    hasSubmittedForm(false);
+    router.push('/rsvp');
   };
 
   return (
@@ -62,21 +72,27 @@ function RSVPPage() {
 
       <div id="modal">
         <Modal
-          isOpen={!!router.query.partyId}
-          onRequestClose={() => router.push('/rsvp')}
+          isOpen={submittedForm}
+          onRequestClose={handleClose}
           contentLabel="Party modal"
           style={ModalOverlay}
         >
-          <Party id={router.query.partyId} pathname={router.pathname} />
+          <Party data={formData} />
         </Modal>
       </div>
 
       <h1>Let us know if you can make it!</h1>
       <form onSubmit={handleSubmit}>
         <label htmlFor="name">
-          Enter your name as shown on your invitation:
+          Enter your name as shown on your invitation:{' '}
         </label>
-        <input id="name" name="name" type="text" />
+        <input
+          id="name"
+          name="name"
+          type="text"
+          onChange={updateName}
+          value={name}
+        />
         <button type="submit">Search</button>
       </form>
     </>
