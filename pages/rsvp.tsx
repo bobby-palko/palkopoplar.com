@@ -3,6 +3,7 @@ import Modal from 'react-modal';
 import { useRouter } from 'next/router';
 import { FormEvent, useState } from 'react';
 import Party from '../components/Party';
+import { RSVPForm } from '../types';
 
 Modal.setAppElement('#modal');
 
@@ -21,10 +22,6 @@ const ModalOverlay = {
     inset: `10% 25%`,
   },
 };
-
-export interface RSVPForm {
-  name: string;
-}
 
 const blankForm: RSVPForm = {
   name: '',
@@ -59,9 +56,9 @@ function RSVPPage() {
   };
 
   const handleClose = () => {
-    setFormData(blankForm);
-    hasSubmittedForm(false);
     router.push('/rsvp');
+    hasSubmittedForm(false);
+    setFormData(blankForm);
   };
 
   return (
@@ -92,6 +89,7 @@ function RSVPPage() {
           type="text"
           onChange={updateName}
           value={name}
+          required
         />
         <button type="submit">Search</button>
       </form>

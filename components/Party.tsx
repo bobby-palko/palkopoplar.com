@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import PersonCard from './PersonCard';
+import { IGuest, ResultData } from '../types';
 
 const StyledParty = styled.div`
   width: 100%;
@@ -8,9 +9,10 @@ const StyledParty = styled.div`
   background-color: var(--cream);
   font-size: 18px;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
-  animation: foldOut 0.3s ease-out;
+  animation: foldOut 0.5s ease-out;
 
   @keyframes foldOut {
     0% {
@@ -76,15 +78,6 @@ const Loader = styled.div`
   }
 `;
 
-interface ResultData {
-  success: boolean;
-  message: string;
-  party?: {
-    partyId: number;
-    name: string;
-  };
-}
-
 interface Props {
   data: {
     name: string;
@@ -94,13 +87,15 @@ interface Props {
 function Party({ data }: Props) {
   const [isLoading, setLoading] = useState(true);
   const [success, setSuccess] = useState(false);
-  const [name, setName] = useState('');
+  const [guests, setGuests] = useState<IGuest[]>([]);
   const [message, setMessage] = useState('');
 
+  const JSONdata = useRef(JSON.stringify(data));
+
   useEffect(() => {
+    let isClosing = false;
     const fetchData = async () => {
       // call api to search
-      const JSONdata = JSON.stringify(data);
 
       const endpoint = '/api/search';
 
@@ -109,26 +104,31 @@ function Party({ data }: Props) {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSONdata,
+        body: JSONdata.current,
       };
 
       // get results
       const response = await fetch(endpoint, options);
-
-      // we found it!
       const result = (await response.json()) as ResultData;
-      if (result.success && result.party) {
-        setName(result.party.name);
+
+      if (!isClosing) {
+        if (result.success && result.party) {
+          setGuests(result.party);
+        }
+        setSuccess(result.success);
+        setMessage(result.message);
+        setLoading(false);
       }
-      setSuccess(result.success);
-      setMessage(result.message);
-      setLoading(false);
     };
 
     fetchData().catch((error) => {
       console.log(error);
     });
-  }, [isLoading, data]);
+
+    return () => {
+      isClosing = true;
+    };
+  }, [isLoading]);
 
   if (isLoading)
     return (
@@ -139,7 +139,8 @@ function Party({ data }: Props) {
   return (
     <StyledParty>
       <h2>{message}</h2>
-      {success && <PersonCard name={name} />}
+      {success &&
+        guests.map((guest) => <PersonCard key={guest.name} guest={guest} />)}
     </StyledParty>
   );
 }

@@ -17,6 +17,7 @@ const GlobalStyles = createGlobalStyle`
     --green: rgba(104,139,15,1);
     --pink: rgba(219,39,106,1);
     --hotPink: rgba(255,81,185,1);
+    --bgPink: rgba(219,39,106,0.5);
     --maxWidth: 1000px;
   }
   html {
