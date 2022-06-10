@@ -1,3 +1,4 @@
+import { FormEvent, useState } from 'react';
 import styled from 'styled-components';
 import { IGuest } from '../types';
 
@@ -13,10 +14,11 @@ const StyledPersonCard = styled.div`
   }
 `;
 
-const StyledForm = styled.form`
+const StyledPerson = styled.div`
   div {
     padding: 10px 5px;
     display: grid;
+    margin: 14px 0;
   }
   label {
     padding: 0 3px 0 0;
@@ -69,46 +71,55 @@ const StyledForm = styled.form`
   }
 
   /* text input styles */
+  div.allergies,
+  div.allergies::before,
+  div.allergies::after {
+    box-sizing: border-box;
+  }
+
   div.allergies {
     display: initial;
-    box-sizing: border-box;
     position: relative;
-    --field-padding: 12px;
-    border-top: 20px solid transparent;
+    border-top: 28px solid transparent;
+    --field-padding: 1.2rem;
   }
 
-  div.allergies input[type='text']:focus + label.allergies {
-    top: -10px;
-    font-size: 10px;
-    color: var(--black);
-  }
-
-  input[type='text'] {
+  div.allergies input {
     border: none;
     -webkit-appearance: none;
     -ms-appearance: none;
     -moz-appearance: none;
     appearance: none;
     background: var(--cream);
-    border: 1px solid var(--cream);
     border-radius: 3px;
     padding: var(--field-padding);
+    font-size: 14px;
+    width: 250px;
   }
-  input[type='text']:focus {
-    outline: none;
-    background-color: var(--cream);
-    border: 2px solid var(--hotPink);
-    margin: -1px;
-  }
+
   label.allergies {
     position: absolute;
     left: var(--field-padding);
-    bottom: 50%;
+    top: 50%;
     transform: translateY(-50%);
     width: calc(100% - (var(--field-padding) * 2));
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+    color: var(--black);
+    pointer-events: none;
+    transition: top 0.3s ease, color 0.3s ease, font-size 0.3s ease;
+  }
+
+  div.allergies input:not(:placeholder-shown) + label.allergies,
+  div.allergies input:focus + label.allergies {
+    top: -10px;
+    font-size: 1.4rem;
+    color: var(--black);
+  }
+
+  input[type='text']:focus {
+    outline: 2px solid var(--hotPink);
   }
 `;
 
@@ -117,21 +128,47 @@ interface Props {
 }
 
 function PersonCard({ guest }: Props) {
+  const [attending, setAttending] = useState(false);
+  const updateAttending = () => {
+    setAttending(!attending);
+  };
+
+  const [allergies, setAllergies] = useState('');
+  const updateAllergies = (event: FormEvent<HTMLInputElement>) => {
+    setAllergies(event.currentTarget.value);
+  };
+
   return (
     <StyledPersonCard>
       <h3>Hi {guest.name}!</h3>
-      <StyledForm>
+      <StyledPerson>
         <div className="attending">
           <label htmlFor="attending">Attending</label>
-          <input type="checkbox" name="attending" className="attending" />
+          <input
+            type="checkbox"
+            name="attending"
+            className="attending"
+            id={`${guest.name}_attending`}
+            onChange={updateAttending}
+            checked={attending}
+            value={`${attending ? 'attending' : ''}`}
+          />
         </div>
         <div className="allergies">
-          <input type="text" name="allergies" className="allergies" />
+          <input
+            type="text"
+            name="allergies"
+            className="allergies"
+            placeholder="&nbsp;"
+            id={`${guest.name}_allergies`}
+            value={allergies}
+            onChange={updateAllergies}
+          />
           <label htmlFor="allergies" className="allergies">
             Notes/Allergies
           </label>
         </div>
-      </StyledForm>
+      </StyledPerson>
     </StyledPersonCard>
   );
 }

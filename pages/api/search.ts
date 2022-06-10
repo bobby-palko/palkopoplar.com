@@ -46,15 +46,14 @@ async function handler(
           });
         } else {
           party.push(partner);
+          res.status(200).json({
+            success: true,
+            message: `We're excited to have you!`,
+            party,
+          });
         }
       }
     }
-
-    res.status(200).json({
-      success: true,
-      message: `We're excited to have you!`,
-      party,
-    });
   }
 }
 

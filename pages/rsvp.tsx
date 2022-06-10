@@ -74,7 +74,10 @@ function RSVPPage() {
           contentLabel="Party modal"
           style={ModalOverlay}
         >
-          <Party data={formData} />
+          <Party
+            data={formData}
+            // onClose={handleClose}
+          />
         </Modal>
       </div>
 

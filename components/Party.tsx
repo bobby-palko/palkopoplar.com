@@ -1,7 +1,8 @@
-import { useEffect, useRef, useState } from 'react';
+import { FormEvent, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import PersonCard from './PersonCard';
 import { IGuest, ResultData } from '../types';
+import Button from './Button';
 
 const StyledParty = styled.div`
   width: 100%;
@@ -22,6 +23,10 @@ const StyledParty = styled.div`
       transform: rotateY(0deg);
     }
   }
+`;
+
+const StyledForm = styled.form`
+  display: grid;
 `;
 
 const LoaderWrapper = styled.div`
@@ -92,6 +97,37 @@ function Party({ data }: Props) {
 
   const JSONdata = useRef(JSON.stringify(data));
 
+  const wait = (amount = 0) =>
+    new Promise((resolve) => {
+      setTimeout(resolve, amount);
+    });
+
+  const update = async (event: FormEvent) => {
+    event.preventDefault();
+
+    for (const guest of guests) {
+      const attending = document.getElementById(
+        `${guest.name}_attending`
+      ) as HTMLInputElement;
+
+      if (attending?.value) {
+        guest.attending = true;
+      }
+
+      const allergies = document.getElementById(
+        `${guest.name}_allergies`
+      ) as HTMLInputElement;
+
+      if (allergies?.value) {
+        guest.allergies = allergies.value;
+      }
+
+      console.log(guest);
+    }
+    await wait(5000);
+    console.log('clicked update!');
+  };
+
   useEffect(() => {
     let isClosing = false;
     const fetchData = async () => {
@@ -139,8 +175,14 @@ function Party({ data }: Props) {
   return (
     <StyledParty>
       <h2>{message}</h2>
-      {success &&
-        guests.map((guest) => <PersonCard key={guest.name} guest={guest} />)}
+      {success && (
+        <StyledForm>
+          {guests.map((guest) => (
+            <PersonCard key={guest.name} guest={guest} />
+          ))}
+          <Button text="Update" update={update} />
+        </StyledForm>
+      )}
     </StyledParty>
   );
 }
