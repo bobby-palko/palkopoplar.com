@@ -24,6 +24,9 @@ const StyledPerson = styled.div`
   }
   label {
     padding-right: 3px;
+    @media screen and (max-width: 500px) {
+      font-size: 2.2rem;
+    }
   }
   /* checkbox styles */
   div.attending {
@@ -45,6 +48,10 @@ const StyledPerson = styled.div`
     cursor: pointer;
     -webkit-transition: all 0.2s ease-in-out;
     transition: all 0.2s ease-in-out;
+    @media screen and (max-width: 500px) {
+      width: 6rem;
+      height: 3rem;
+    }
   }
 
   input[type='checkbox']:checked {
@@ -65,10 +72,17 @@ const StyledPerson = styled.div`
     left: 0;
     -webkit-transition: all 0.2s ease-in-out;
     transition: all 0.2s ease-in-out;
+    @media screen and (max-width: 500px) {
+      width: 3rem;
+      height: 3rem;
+    }
   }
 
   input[type='checkbox']:checked:after {
     left: calc(100% - 1.5em);
+    @media screen and (max-width: 500px) {
+      left: calc(100% - 3em);
+    }
   }
 
   /* text input styles */
@@ -82,7 +96,7 @@ const StyledPerson = styled.div`
     display: initial;
     position: relative;
     border-top: 28px solid transparent;
-    --field-padding: 10px;
+    --field-padding: 12px;
   }
 
   div.allergies input {
@@ -94,7 +108,7 @@ const StyledPerson = styled.div`
     background: var(--cream);
     border-radius: 3px;
     padding: var(--field-padding);
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     width: 250px;
   }
 
@@ -115,7 +129,7 @@ const StyledPerson = styled.div`
   div.allergies input:not(:placeholder-shown) + label.allergies,
   div.allergies input:focus + label.allergies {
     top: -10px;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     color: var(--black);
   }
 
@@ -153,7 +167,7 @@ function PersonCard({ guest }: Props) {
               placeholder="&nbsp;"
             />
             <label className="allergies" htmlFor="name-edit">
-              wait
+              Name of this Guest
             </label>
           </div>
         )}

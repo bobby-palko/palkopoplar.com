@@ -12,6 +12,7 @@ function Nav() {
     <StyledNav>
       <Link href="/">Home</Link>
       <Link href="/stay">Stay</Link>
+      <Link href="/rsvp">RSVP</Link>
     </StyledNav>
   );
 }

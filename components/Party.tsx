@@ -15,8 +15,16 @@ const StyledParty = styled.div`
   justify-content: space-evenly;
   animation: foldOut 0.5s ease-out;
 
+  @media screen and (max-width: 500px) {
+    overflow-x: hidden;
+    overscroll-behavior-x: none;
+  }
+
   h2 {
     font-size: 3rem;
+    @media screen and (max-width: 500px) {
+      margin-top: 4rem;
+    }
   }
 
   @keyframes foldOut {
@@ -37,14 +45,21 @@ const StyledForm = styled.form`
 `;
 
 const StyledClose = styled.button`
-  position: sticky;
+  position: absolute;
   float: right;
   left: calc(100% - 6rem);
   top: 2rem;
   border: none;
-  background-color: inherit;
+  background-color: transparent;
   font-size: 3rem;
+  color: var(--black);
   cursor: pointer;
+  @media screen and (max-width: 500px) {
+    position: absolute;
+    font-size: 4rem;
+    left: calc(100% - 2.5em);
+    top: 0;
+  }
 `;
 
 interface Props {

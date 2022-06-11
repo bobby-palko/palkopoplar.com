@@ -10,6 +10,7 @@ const StyledButton = styled.button`
   cursor: pointer;
   transition: all 0.3s ease 0s;
   font: inherit;
+  color: var(--black);
   font-size: 2rem;
   &:hover {
     background-color: var(--pink);

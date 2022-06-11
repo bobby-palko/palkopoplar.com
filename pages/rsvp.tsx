@@ -1,12 +1,10 @@
 import Head from 'next/head';
-import Modal from 'react-modal';
 import { useRouter } from 'next/router';
 import { FormEvent, useState } from 'react';
 import styled from 'styled-components';
 import Party from '../components/Party';
+import { StyledModal } from '../components/ModalAdapter';
 import { RSVPSearchForm } from '../types';
-
-Modal.setAppElement('#modal');
 
 const StyledForm = styled.form`
   display: flex;
@@ -29,13 +27,14 @@ const StyledInput = styled.div`
 
   input {
     border: none;
+    border-radius: 0;
     -webkit-appearance: none;
     -ms-appearance: none;
     -moz-appearance: none;
     appearance: none;
     background: var(--cream);
     padding: var(--field-padding);
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     box-sizing: border-box;
     width: 100%;
     border-bottom: 3px solid var(--hotPink);
@@ -81,19 +80,6 @@ const StyledButton = styled.button`
   }
 `;
 
-const ModalOverlay = {
-  overlay: {
-    backgroundColor: `rgba(0,0,0,0.5)`,
-  },
-  content: {
-    backgroundColor: `var(--cream)`,
-    border: `none`,
-    borderRadius: `10px`,
-    padding: `0`,
-    inset: `10% 25%`,
-  },
-};
-
 const blankForm: RSVPSearchForm = {
   name: '',
 };
@@ -138,16 +124,13 @@ function RSVPPage() {
         <title>RSVP</title>
       </Head>
 
-      <div id="modal">
-        <Modal
-          isOpen={submittedForm}
-          onRequestClose={handleClose}
-          contentLabel="Party modal"
-          style={ModalOverlay}
-        >
-          <Party data={formData} onClose={handleClose} />
-        </Modal>
-      </div>
+      <StyledModal
+        isOpen={submittedForm}
+        onRequestClose={handleClose}
+        contentLabel="Party modal"
+      >
+        <Party data={formData} onClose={handleClose} />
+      </StyledModal>
 
       <h1>Let us know if you can make it!</h1>
       <StyledForm onSubmit={handleSubmit}>
