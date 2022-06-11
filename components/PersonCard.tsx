@@ -11,6 +11,7 @@ const StyledPersonCard = styled.div`
   /* greeting */
   h3 {
     text-align: center;
+    font-size: 2.5rem;
   }
 `;
 
@@ -18,10 +19,11 @@ const StyledPerson = styled.div`
   div {
     padding: 10px 5px;
     display: grid;
-    margin: 14px 0;
+    margin: 20px 0;
+    font-size: 1.8rem;
   }
   label {
-    padding: 0 3px 0 0;
+    padding-right: 3px;
   }
   /* checkbox styles */
   div.attending {
@@ -41,7 +43,6 @@ const StyledPerson = styled.div`
     border-radius: 3em;
     position: relative;
     cursor: pointer;
-    /* outline: none; */
     -webkit-transition: all 0.2s ease-in-out;
     transition: all 0.2s ease-in-out;
   }
@@ -81,7 +82,7 @@ const StyledPerson = styled.div`
     display: initial;
     position: relative;
     border-top: 28px solid transparent;
-    --field-padding: 1.2rem;
+    --field-padding: 10px;
   }
 
   div.allergies input {
@@ -93,7 +94,7 @@ const StyledPerson = styled.div`
     background: var(--cream);
     border-radius: 3px;
     padding: var(--field-padding);
-    font-size: 14px;
+    font-size: 1.4rem;
     width: 250px;
   }
 
@@ -128,20 +129,34 @@ interface Props {
 }
 
 function PersonCard({ guest }: Props) {
-  const [attending, setAttending] = useState(false);
+  const [attending, setAttending] = useState(guest.attending);
   const updateAttending = () => {
     setAttending(!attending);
   };
 
-  const [allergies, setAllergies] = useState('');
+  const [allergies, setAllergies] = useState(guest.allergies);
   const updateAllergies = (event: FormEvent<HTMLInputElement>) => {
     setAllergies(event.currentTarget.value);
   };
 
   return (
     <StyledPersonCard>
-      <h3>Hi {guest.name}!</h3>
+      <h3>{guest.name}</h3>
       <StyledPerson>
+        {guest.nameIsEditable && (
+          <div className="allergies">
+            <input
+              className="allergies"
+              name="name-edit"
+              type="text"
+              id="name-edit"
+              placeholder="&nbsp;"
+            />
+            <label className="allergies" htmlFor="name-edit">
+              wait
+            </label>
+          </div>
+        )}
         <div className="attending">
           <label htmlFor="attending">Attending</label>
           <input

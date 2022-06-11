@@ -1,10 +1,7 @@
 import { ObjectId } from 'mongoose';
 
-export interface RSVPForm {
-  name: string;
-}
-
 export interface IGuest {
+  _id: ObjectId;
   name: string;
   nameIsEditable: boolean;
   rsvpd: boolean;
@@ -17,4 +14,12 @@ export interface ResultData {
   success: boolean;
   message: string;
   party?: IGuest[];
+}
+
+export interface RSVPSearchForm {
+  name: string;
+}
+
+export interface RSVPSubmitForm {
+  guests: IGuest[];
 }

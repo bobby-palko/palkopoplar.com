@@ -3,8 +3,17 @@ import styled from 'styled-components';
 
 const StyledButton = styled.button`
   border: none;
-  background-color: var(--pink);
-  padding: 10px 15px;
+  background-color: var(--hotPink);
+  padding: 10px 0;
+  border-radius: 5px;
+  width: 100%;
+  cursor: pointer;
+  transition: all 0.3s ease 0s;
+  font: inherit;
+  font-size: 2rem;
+  &:hover {
+    background-color: var(--pink);
+  }
 `;
 
 interface Props {

@@ -1,19 +1,23 @@
 import { FormEvent, useEffect, useRef, useState } from 'react';
+import { useRouter } from 'next/router';
 import styled from 'styled-components';
-import PersonCard from './PersonCard';
 import { IGuest, ResultData } from '../types';
+import PersonCard from './PersonCard';
 import Button from './Button';
+import HeartLoader from './HeartLoader';
 
 const StyledParty = styled.div`
-  width: 100%;
-  height: 100%;
   background-color: var(--cream);
-  font-size: 18px;
+  padding: 16px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
   animation: foldOut 0.5s ease-out;
+
+  h2 {
+    font-size: 3rem;
+  }
 
   @keyframes foldOut {
     0% {
@@ -27,107 +31,104 @@ const StyledParty = styled.div`
 
 const StyledForm = styled.form`
   display: grid;
+  grid-template-rows: 1fr 1fr auto;
+  justify-items: center;
+  gap: 10px;
 `;
 
-const LoaderWrapper = styled.div`
-  width: 100%;
-  height: 100%;
-  background-color: var(--cream);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-
-const Loader = styled.div`
-  position: relative;
-  width: 40px;
-  height: 60px;
-  animation: heartBeat 1.2s infinite cubic-bezier(0.215, 0.61, 0.355, 1);
-
-  :before,
-  :after {
-    content: '';
-    background: var(--hotPink);
-    width: 40px;
-    height: 60px;
-    border-radius: 50px 50px 0 0;
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    transform: rotate(45deg);
-    transform-origin: 50% 68%;
-    box-shadow: 5px 4px 5px var(--pink) inset;
-  }
-  :after {
-    transform: rotate(-45deg);
-  }
-  @keyframes heartBeat {
-    0% {
-      transform: scale(0.95);
-    }
-    5% {
-      transform: scale(1.1);
-    }
-    39% {
-      transform: scale(0.85);
-    }
-    45% {
-      transform: scale(1);
-    }
-    60% {
-      transform: scale(0.95);
-    }
-    100% {
-      transform: scale(0.9);
-    }
-  }
+const StyledClose = styled.button`
+  position: sticky;
+  float: right;
+  left: calc(100% - 6rem);
+  top: 2rem;
+  border: none;
+  background-color: inherit;
+  font-size: 3rem;
+  cursor: pointer;
 `;
 
 interface Props {
   data: {
     name: string;
   };
+  onClose: () => void;
 }
 
-function Party({ data }: Props) {
+function Party({ data, onClose }: Props) {
   const [isLoading, setLoading] = useState(true);
   const [success, setSuccess] = useState(false);
   const [guests, setGuests] = useState<IGuest[]>([]);
   const [message, setMessage] = useState('');
 
   const JSONdata = useRef(JSON.stringify(data));
+  const router = useRouter();
 
-  const wait = (amount = 0) =>
-    new Promise((resolve) => {
-      setTimeout(resolve, amount);
-    });
-
+  /*
+   * RSVPs a guest, including if they are attending
+   * or have any allergies/things we should know.
+   */
   const update = async (event: FormEvent) => {
     event.preventDefault();
-
+    // update the guest objects we currently have
     for (const guest of guests) {
+      // they've RSVP'd by clicking the update button
+      guest.rsvpd = true;
+
+      // grab attending status
       const attending = document.getElementById(
         `${guest.name}_attending`
       ) as HTMLInputElement;
 
-      if (attending?.value) {
-        guest.attending = true;
-      }
+      // box is checked, they're attending
+      guest.attending = !!attending?.value;
 
+      // any allergies?
       const allergies = document.getElementById(
         `${guest.name}_allergies`
       ) as HTMLInputElement;
 
-      if (allergies?.value) {
-        guest.allergies = allergies.value;
-      }
+      // if they removed any prior notes that may have existed
+      // return to an empty string value
+      guest.allergies = allergies.value || '';
 
-      console.log(guest);
+      // if its a guest, update the name
+      if (guest.nameIsEditable) {
+        const newName = document.getElementById(
+          'name-edit'
+        ) as HTMLInputElement;
+
+        // fall back to 'Guest' if no name provided
+        guest.name = newName.value || 'Guest';
+      }
     }
-    await wait(5000);
-    console.log('clicked update!');
+
+    const updatedGuests = JSON.stringify({ guests: [...guests] });
+
+    // update guests in the DB
+    const endpoint = 'api/updateGuest';
+
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: updatedGuests,
+    };
+
+    // get results
+    const response = await fetch(endpoint, options);
+    const result = (await response.json()) as ResultData;
+
+    if (result.success) {
+      // close the modal and redirect to page with FAQs, directions, etc
+      // TODO proper redirection
+      router.push('/');
+    }
   };
 
+  /*
+   * Search for name entered in previous form
+   */
   useEffect(() => {
     let isClosing = false;
     const fetchData = async () => {
@@ -166,14 +167,13 @@ function Party({ data }: Props) {
     };
   }, [isLoading]);
 
-  if (isLoading)
-    return (
-      <LoaderWrapper>
-        <Loader />
-      </LoaderWrapper>
-    );
+  if (isLoading) return <HeartLoader />;
+
   return (
     <StyledParty>
+      <StyledClose type="button" onClick={onClose}>
+        &times;
+      </StyledClose>
       <h2>{message}</h2>
       {success && (
         <StyledForm>
