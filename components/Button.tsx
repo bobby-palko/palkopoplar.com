@@ -1,4 +1,4 @@
-import { FormEvent } from 'react';
+import { FormEvent, useState } from 'react';
 import styled from 'styled-components';
 
 const StyledButton = styled.button`
@@ -23,13 +23,18 @@ interface Props {
 }
 
 function Button({ text, update }: Props) {
+  const [btnText, setText] = useState(text);
+  const [disabled, setDisabled] = useState(false);
+
   const clickHandler = (event: FormEvent) => {
     event.preventDefault();
+    setDisabled(true);
+    setText('Submitting...');
     update(event);
   };
   return (
-    <StyledButton type="button" onClick={clickHandler}>
-      {text}
+    <StyledButton type="button" onClick={clickHandler} disabled={disabled}>
+      {btnText}
     </StyledButton>
   );
 }

@@ -1,6 +1,6 @@
 import { FormEvent, useEffect, useRef, useState } from 'react';
-import { useRouter } from 'next/router';
 import styled from 'styled-components';
+import Link from 'next/link';
 import { IGuest, ResultData } from '../types';
 import PersonCard from './PersonCard';
 import Button from './Button';
@@ -34,6 +34,10 @@ const StyledParty = styled.div`
     100% {
       transform: rotateY(0deg);
     }
+  }
+
+  .info {
+    font-size: 2rem;
   }
 `;
 
@@ -70,13 +74,14 @@ interface Props {
 }
 
 function Party({ data, onClose }: Props) {
+  // there's probably a better way than all these states but eh
   const [isLoading, setLoading] = useState(true);
   const [success, setSuccess] = useState(false);
   const [guests, setGuests] = useState<IGuest[]>([]);
   const [message, setMessage] = useState('');
+  const [hasSubmitted, setSubmitted] = useState(false);
 
   const JSONdata = useRef(JSON.stringify(data));
-  const router = useRouter();
 
   /*
    * RSVPs a guest, including if they are attending
@@ -135,9 +140,9 @@ function Party({ data, onClose }: Props) {
     const result = (await response.json()) as ResultData;
 
     if (result.success) {
-      // close the modal and redirect to page with FAQs, directions, etc
-      // TODO proper redirection
-      router.push('/');
+      setMessage('We got your RSVP!');
+      setSuccess(false); // so we only show the message
+      setSubmitted(true);
     }
   };
 
@@ -183,6 +188,17 @@ function Party({ data, onClose }: Props) {
   }, [isLoading]);
 
   if (isLoading) return <HeartLoader />;
+
+  if (hasSubmitted) {
+    return (
+      <StyledParty>
+        <h2>{message}</h2>
+        <p className="info">
+          Check out some more <Link href="/info">info about the day!</Link>
+        </p>
+      </StyledParty>
+    );
+  }
 
   return (
     <StyledParty>

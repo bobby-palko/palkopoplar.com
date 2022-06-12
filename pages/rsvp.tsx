@@ -74,7 +74,8 @@ const StyledButton = styled.button`
   cursor: pointer;
   transition: all 0.3s ease 0s;
   font: inherit;
-  font-size: 2rem;
+  font-size: 2.2rem;
+  color: var(--black);
   &:hover {
     background-color: var(--pink);
   }
