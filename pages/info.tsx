@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import Link from 'next/link';
 import styled from 'styled-components';
+import Accordion from '../components/Accordion';
 
 const StyledInfoPage = styled.div`
   font-size: 2rem;
@@ -65,6 +66,7 @@ function InfoPage() {
         <br />
         Ithaca is Gorges!
       </p>
+      <Accordion />
     </StyledInfoPage>
   );
 }

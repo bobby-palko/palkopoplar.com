@@ -30,7 +30,7 @@ const GlobalStyles = createGlobalStyle`
     font-weight: 400;
     font-style: normal;
     font-size: 1.6rem;
-    word-spacing: 0.3rem;
+    word-spacing: 0.2em;
     margin: 0;
     padding: 0;
   }
