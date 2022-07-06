@@ -1,3 +1,4 @@
+/* eslint-disable react/no-danger */
 import { useRef } from 'react';
 import styled from 'styled-components';
 
@@ -23,6 +24,10 @@ const StyledAccordionItem = styled.li.attrs((props) => ({
     align-items: center;
   }
 
+  button span {
+    z-index: 1;
+  }
+
   button:before {
     content: '';
     height: 100%;
@@ -30,44 +35,29 @@ const StyledAccordionItem = styled.li.attrs((props) => ({
     position: absolute;
     top: 0;
     left: 0;
-    background: linear-gradient(
-      130deg,
-      transparent 0% 33%,
-      var(--pink) 66%,
-      var(--hotPink) 100%
-    );
+    background: linear-gradient(130deg, transparent 0% 55%, var(--pink) 100%);
     background-position: 0% 0%;
     background-size: 300% 300%;
-    transition: background-position ease 0.5s;
+    transition: background-position ease 350ms;
   }
 
-  span {
+  span.control {
     font-size: 8rem;
   }
 
   .answer {
     padding: 1em;
     font-size: 2.2rem;
-  }
-
-  &.active button {
-    position: relative;
-    color: var(--white);
+    line-height: 1.5em;
   }
 
   &.active button:before {
     background-position: 100% 100%;
-    z-index: -1;
   }
 
   .answer-wrapper {
     overflow: hidden;
-    height: 0;
-    transition: height ease 0.2s;
-  }
-
-  .answer-wrapper.open {
-    height: 100px;
+    transition: height ease 250ms;
   }
 `;
 
@@ -88,19 +78,21 @@ function AccordionItem({ faq, onToggle, active }: Props) {
   return (
     <StyledAccordionItem className={active ? 'active' : ''}>
       <button type="button" onClick={onToggle}>
-        {question}
-        <span>{active ? '-' : '+'}</span>
+        <span>{question}</span>
+        <span className="control">{active ? '-' : '+'}</span>
       </button>
       <div
         ref={contentEl}
         className="answer-wrapper"
         style={
           active
-            ? { height: contentEl.current?.scrollHeight }
+            ? {
+                height: contentEl.current?.scrollHeight,
+              }
             : { height: '0px' }
         }
       >
-        <div className="answer">{answer}</div>
+        <div className="answer" dangerouslySetInnerHTML={{ __html: answer }} />
       </div>
     </StyledAccordionItem>
   );
