@@ -7,6 +7,17 @@ const StyledAccordionItem = styled.li.attrs((props) => ({
 }))`
   border-top: 2px solid var(--cream);
 
+  animation: flipIn 1000ms ease;
+
+  @keyframes flipIn {
+    0% {
+      transform: rotateX(90deg);
+    }
+    100% {
+      transform: rotateX(0);
+    }
+  }
+
   button {
     position: relative;
     font-size: 4rem;

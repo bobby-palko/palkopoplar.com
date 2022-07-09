@@ -5,6 +5,37 @@ import styled from 'styled-components';
 import Party from '../components/Party';
 import { StyledModal } from '../components/ModalAdapter';
 import { RSVPSearchForm } from '../types';
+import BGImage from '../components/BGImage';
+
+const StyledRSVPPage = styled.div`
+  position: relative;
+
+  .rsvp-form {
+    position: absolute;
+    z-index: 10;
+    top: 0;
+    left: 2em;
+    animation: fadeIn 500ms ease-in;
+
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+  }
+
+  @media (max-width: 750px) {
+    .rsvp-form {
+      position: relative;
+      left: 0;
+      padding: 0 4em;
+      margin-bottom: -2em;
+    }
+  }
+`;
 
 const StyledForm = styled.form`
   display: flex;
@@ -27,7 +58,7 @@ const StyledInput = styled.div`
 
   input {
     border: none;
-    border-radius: 0;
+    border-radius: 5px;
     -webkit-appearance: none;
     -ms-appearance: none;
     -moz-appearance: none;
@@ -76,6 +107,7 @@ const StyledButton = styled.button`
   font: inherit;
   font-size: 2.2rem;
   color: var(--black);
+  box-shadow: 1px 1px 5px 0 hsla(0, 0%, 0%, 0.33);
   &:hover {
     background-color: var(--pink);
   }
@@ -120,7 +152,7 @@ function RSVPPage() {
   };
 
   return (
-    <>
+    <StyledRSVPPage>
       <Head>
         <title>RSVP</title>
       </Head>
@@ -132,25 +164,27 @@ function RSVPPage() {
       >
         <Party data={formData} onClose={handleClose} />
       </StyledModal>
-
-      <h1>Let us know if you can make it!</h1>
-      <StyledForm onSubmit={handleSubmit}>
-        <StyledInput>
-          <input
-            id="name"
-            name="name"
-            type="text"
-            onChange={updateName}
-            value={name}
-            required
-          />
-          <label htmlFor="name">
-            Enter your name as shown on your invitation
-          </label>
-        </StyledInput>
-        <StyledButton type="submit">Search</StyledButton>
-      </StyledForm>
-    </>
+      <div className="rsvp-form">
+        <h1>Let us know if you can make it!</h1>
+        <StyledForm onSubmit={handleSubmit}>
+          <StyledInput>
+            <input
+              id="name"
+              name="name"
+              type="text"
+              onChange={updateName}
+              value={name}
+              required
+            />
+            <label htmlFor="name">
+              Enter your name as shown on your invitation
+            </label>
+          </StyledInput>
+          <StyledButton type="submit">Search</StyledButton>
+        </StyledForm>
+      </div>
+      <BGImage />
+    </StyledRSVPPage>
   );
 }
 

@@ -34,6 +34,7 @@ export const StyledModal = styled(ReactModalAdapter)`
     left: 0px;
     right: 0px;
     bottom: 0px;
+    z-index: 20;
     background-color: rgba(0, 0, 0, 0.5);
     @media screen and (max-width: 500px) {
       overflow-x: hidden;
