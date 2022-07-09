@@ -12,16 +12,15 @@ const StyledStayPage = styled.div`
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 300px));
     align-items: center;
+    justify-content: center;
 
-    div {
+    > div {
       background-color: var(--bgPink);
       display: inline-block;
       padding: 2rem 1.5rem;
       margin: 1rem;
       border-radius: 0.5em;
       border: solid 1px var(--black);
-      max-width: 7em;
-      max-height: 7em;
       justify-self: center;
     }
 

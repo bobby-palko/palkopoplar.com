@@ -49,8 +49,8 @@ const StyledPerson = styled.div`
     -webkit-transition: all 0.2s ease-in-out;
     transition: all 0.2s ease-in-out;
     @media screen and (max-width: 500px) {
-      width: 6rem;
-      height: 3rem;
+      width: 6em;
+      height: 3em;
     }
   }
 
@@ -73,8 +73,8 @@ const StyledPerson = styled.div`
     -webkit-transition: all 0.2s ease-in-out;
     transition: all 0.2s ease-in-out;
     @media screen and (max-width: 500px) {
-      width: 3rem;
-      height: 3rem;
+      width: 3em;
+      height: 3em;
     }
   }
 

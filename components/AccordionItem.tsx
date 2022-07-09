@@ -4,15 +4,16 @@ import styled from 'styled-components';
 
 const StyledAccordionItem = styled.li.attrs((props) => ({
   className: props.className,
-}))`
+}))<{ delay: number }>`
   border-top: 2px solid var(--cream);
+  transform: rotateX(90deg);
 
-  animation: flipIn 1000ms ease;
+  animation: flipIn 1000ms ease ${(props) => props.delay * 150}ms forwards;
 
   @keyframes flipIn {
-    0% {
+    /* 0% {
       transform: rotateX(90deg);
-    }
+    } */
     100% {
       transform: rotateX(0);
     }
@@ -79,15 +80,16 @@ interface Props {
   };
   onToggle: () => void;
   active: boolean;
+  delay: number;
 }
 
-function AccordionItem({ faq, onToggle, active }: Props) {
+function AccordionItem({ faq, onToggle, active, delay }: Props) {
   const { question, answer } = faq;
 
   const contentEl = useRef<HTMLDivElement>(null);
 
   return (
-    <StyledAccordionItem className={active ? 'active' : ''}>
+    <StyledAccordionItem className={active ? 'active' : ''} delay={delay}>
       <button type="button" onClick={onToggle}>
         <span>{question}</span>
         <span className="control">{active ? '-' : '+'}</span>

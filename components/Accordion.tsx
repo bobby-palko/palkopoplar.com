@@ -26,6 +26,7 @@ function Accordion() {
           faq={faq}
           onToggle={() => handleToggle(index)}
           active={opened === index}
+          delay={index}
         />
       ))}
     </StyledAccordion>

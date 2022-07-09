@@ -13,8 +13,10 @@ const StyledRSVPPage = styled.div`
   .rsvp-form {
     position: absolute;
     z-index: 10;
-    top: 0;
-    left: 2em;
+    top: 33%;
+    left: 25vw;
+    right: 25vw;
+    /* max-width: 400px; */
     animation: fadeIn 500ms ease-in;
 
     @keyframes fadeIn {
@@ -25,14 +27,25 @@ const StyledRSVPPage = styled.div`
         opacity: 1;
       }
     }
+
+    h1 {
+      font-size: 5rem;
+      text-align: center;
+    }
   }
 
   @media (max-width: 750px) {
     .rsvp-form {
       position: relative;
+      top: 0;
       left: 0;
+      right: 0;
       padding: 0 4em;
       margin-bottom: -2em;
+
+      h1 {
+        font-size: 3rem;
+      }
     }
   }
 `;
