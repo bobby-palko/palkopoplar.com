@@ -2,6 +2,7 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { FormEvent, useState } from 'react';
 import styled from 'styled-components';
+import ReactModal from 'react-modal';
 import Party from '../components/Party';
 import { StyledModal } from '../components/ModalAdapter';
 import { RSVPSearchForm } from '../types';
@@ -135,6 +136,8 @@ function RSVPPage() {
   const [name, setName] = useState('');
   const [submittedForm, hasSubmittedForm] = useState(false);
   const [formData, setFormData] = useState(blankForm);
+
+  ReactModal.setAppElement('#__next');
 
   interface UpdateNameProps {
     target: {

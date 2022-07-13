@@ -21,6 +21,7 @@ const StyledParty = styled.div`
   }
 
   h2 {
+    margin-top: 2em;
     font-size: 3rem;
     @media screen and (max-width: 500px) {
       margin-top: 4rem;
