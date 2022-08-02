@@ -4,6 +4,15 @@ import styled from 'styled-components';
 const StyledStayPage = styled.div`
   padding: 4rem;
   font-size: 2rem;
+  animation: fadeIn 500ms ease-in;
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
   h1 {
     font-size: 7.2rem;
   }
@@ -13,6 +22,7 @@ const StyledStayPage = styled.div`
     grid-template-columns: repeat(auto-fit, minmax(250px, 300px));
     align-items: center;
     justify-content: center;
+    animation: foldOut 1s ease-out;
 
     > div {
       background-color: var(--bgPink);
@@ -26,6 +36,16 @@ const StyledStayPage = styled.div`
 
     a {
       color: var(--cream);
+    }
+
+    @keyframes foldOut {
+      0%,
+      50% {
+        transform: rotateY(90deg);
+      }
+      100% {
+        transform: rotateY(0deg);
+      }
     }
   }
 `;

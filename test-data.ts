@@ -8,7 +8,7 @@ export const faqs = [
     gap: 5px;
     ">
       <p>
-      The entrance to the Farmer's Market is not well marked; we will have it decorated so you can find it easily. If you're driving in, once you turn towards the Aldi's Supermarket keep going! You're almost there!</p>
+      The entrance to the Farmers Market is not well marked; we will have it decorated so you can find it easily. If you're driving in, once you turn towards the Aldi's Supermarket, keep going! You're almost there!</p>
       <div style="
         background-color: var(--bgPink); 
         display: inline-block; 
@@ -32,7 +32,7 @@ export const faqs = [
   {
     question: 'Shuttle Info',
     answer: `<p>
-    If you're staying at one of the <a href="/stay">hotels we've partnered with</a>, we'll have a shuttle to transport you. The hotels are on adjacent properties, and the shuttle will leave from them at 5:30pm. It will depart the venue at midnight to return to the hotels. We'll have it stocked with some welcome goodie bags for the ride!
+    If you're staying at one of the <a href="/stay">hotels we've partnered with</a>, we'll have a shuttle to transport you to and from the venue. The two hotels are on adjacent properties, and the shuttle will leave from the parking lot between them at 5:30pm. It will depart the venue at midnight to return to the hotels. We'll have the bus stocked with some goodie bags for the ride! Please note: the bus ride is about 45 minutes each way.
     </p>`,
   },
   {
@@ -58,11 +58,11 @@ export const faqs = [
       gap: 5px;
     ">
       <div style="
-        background-color: var(--cream); 
+        background-color: var(--bgPink); 
         display: inline-block; 
         padding: 3rem 1.5rem;
         border-radius: 0.5em;
-        border: solid 5px var(--bgPink);
+        border: solid 1px var(--black);
         max-width: 7em;
         max-height: 7em;
         justify-self: center;
@@ -70,11 +70,11 @@ export const faqs = [
         <p>Org 1</p>
       </div>
       <div style="
-        background-color: var(--cream); 
+        background-color: var(--bgPink); 
         display: inline-block; 
         padding: 3rem 1.5rem;
         border-radius: 0.5em;
-        border: solid 5px var(--bgPink);
+        border: solid 1px var(--black);
         max-width: 7em;
         max-height: 7em;
         justify-self: center;

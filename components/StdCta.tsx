@@ -4,28 +4,31 @@ import styled from 'styled-components';
 
 const StyledStdCta = styled.div`
   font-size: 2rem;
+  h1 {
+    font-size: 7.2rem;
+    margin-bottom: 0;
+  }
+
+  p {
+    margin-bottom: 20rem;
+  }
 
   animation: slideIn 750ms ease;
 
   @keyframes slideIn {
     0% {
-      transform: translateX(-500px);
+      transform: translateX(-300px);
     }
     100% {
       transform: translateX(0);
     }
   }
 
-  h1 {
-    font-size: 7.2rem;
-    margin-bottom: 0;
-  }
-
   @media (max-width: 600px) {
     z-index: 1;
     position: absolute;
     left: 1em;
-    top: 7.5em;
+    top: 7em;
 
     h1 {
       font-size: 5rem;
