@@ -1,6 +1,6 @@
 import { FormEvent, useState } from 'react';
 import styled from 'styled-components';
-import { IGuest } from '../types';
+import { IGuest } from '../types/types';
 
 const StyledPersonCard = styled.div`
   background-color: var(--bgPink);

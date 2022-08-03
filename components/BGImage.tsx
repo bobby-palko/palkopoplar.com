@@ -27,7 +27,7 @@ function BGImage() {
       <div className="magic" />
       <Image
         src={wedding03}
-        alt="Bobby and Erin looking out over the water"
+        alt="Bobby and Erin looking at each other"
         placeholder="blur"
         priority
       />

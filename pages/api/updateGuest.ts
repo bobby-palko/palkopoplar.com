@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { RSVPSubmitForm, ResultData } from '../../types';
+import { RSVPSubmitForm, ResultData } from '../../types/types';
 import dbConnect from '../../lib/dbConnect';
 import Guest from '../../models/Guest';
 

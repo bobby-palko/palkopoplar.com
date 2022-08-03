@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import { IGuest } from '../types';
+import { IGuest } from '../types/types';
 
 const GuestSchema = new mongoose.Schema<IGuest>({
   name: {

@@ -10,6 +10,10 @@ export interface IGuest {
   allergies: string;
 }
 
+export interface ILogIn {
+  password: string;
+}
+
 export interface ResultData {
   success: boolean;
   message: string;

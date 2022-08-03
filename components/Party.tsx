@@ -1,7 +1,7 @@
 import { FormEvent, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import Link from 'next/link';
-import { IGuest, ResultData } from '../types';
+import { IGuest, ResultData } from '../types/types';
 import PersonCard from './PersonCard';
 import Button from './Button';
 import HeartLoader from './HeartLoader';
@@ -181,6 +181,13 @@ function Party({ data, onClose }: Props) {
 
     fetchData().catch((error) => {
       console.log(error);
+      setMessage(
+        `Something went wrong! Please try again.
+If this continues please let Bobby know: 
+${error as string}`
+      );
+      setSuccess(false);
+      setLoading(false);
     });
 
     return () => {
