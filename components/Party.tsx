@@ -200,6 +200,9 @@ ${error as string}`
   if (hasSubmitted) {
     return (
       <StyledParty>
+        <StyledClose type="button" onClick={onClose}>
+          &times;
+        </StyledClose>
         <h2>{message}</h2>
         <p className="info">
           Check out some more <Link href="/info">info about the day!</Link>

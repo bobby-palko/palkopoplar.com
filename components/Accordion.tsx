@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import styled from 'styled-components';
-import { faqs } from '../test-data';
+import { faqs } from '../faqs';
 import AccordionItem from './AccordionItem';
 
 const StyledAccordion = styled.ul`

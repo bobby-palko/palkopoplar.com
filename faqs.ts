@@ -20,11 +20,11 @@ export const faqs = [
         justify-self: center;
       ">
       <a href="https://www.google.com/maps/place/Ithaca+Farmers+Market/@42.4509999,-76.5114921,17z/data=!3m1!4b1!4m5!3m4!1s0x89d0817c483332a1:0x697348f602028b6c!8m2!3d42.450996!4d-76.5093034" target="_blank" style="color: var(--cream);">
-      545 3rd St
-      <br>
-      Steamboat Landing
-      <br>
+      <address>
+      545 3rd St<br>
+      Steamboat Landing<br>
       Ithaca, NY 14850-3208
+      </address>
       </a>
       </div>
     </div>`,
@@ -42,12 +42,6 @@ export const faqs = [
     </p>`,
   },
   {
-    question: 'Food',
-    answer: `<p>
-    Because it is important to us, all of the food that is served will be vegan. We ask that you mark any food allergies on your RSVP so we can be sure to accomodate your needs too!
-    </p>`,
-  },
-  {
     question: 'Gifts',
     answer: `<p style="text-align: center;">
     In leiu of gifts, please make a donation to one of these organizations important to us:
@@ -60,26 +54,32 @@ export const faqs = [
       <div style="
         background-color: var(--bgPink); 
         display: inline-block; 
-        padding: 3rem 1.5rem;
+        padding: 1.5rem;
         border-radius: 0.5em;
         border: solid 1px var(--black);
         max-width: 7em;
-        max-height: 7em;
         justify-self: center;
       ">
-        <p>Org 1</p>
+        <p style="font-size: 1.6rem;">
+          <a href="https://bvspca.org/donate/" target="_blank" style="color: var(--cream); font-size: 2.5rem;">Brandywine Valley SPCA</a><br>
+          Give to help provide food, shelter, and care to homeless animals across the area.
+          <br>
+
+        </p>
       </div>
       <div style="
         background-color: var(--bgPink); 
         display: inline-block; 
-        padding: 3rem 1.5rem;
+        padding: 1.5rem;
         border-radius: 0.5em;
         border: solid 1px var(--black);
         max-width: 7em;
-        max-height: 7em;
         justify-self: center;
       ">
-        <p>Org 2</p>
+        <p style="font-size: 1.6rem;">
+          <a href="https://www.onesimplewish.org/" target="_blank" style="color: var(--cream); font-size: 2.5rem;">One Simple Wish</a><br>
+          Give to restore happiness to those who have been impacted by the trauma of foster care and childhood crisis.
+        </p>
       </div>
     </div>
     </p>`,

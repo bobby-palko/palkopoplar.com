@@ -6,9 +6,8 @@ import SignInForm from '../components/SignInForm';
 
 const StyledDashboardPage = styled.div`
   a {
-    position: relative;
-    left: 75%;
-    top: 2em;
+    text-align: center;
+    margin-top: 5em;
     font-size: 2rem;
     border: none;
     background-color: var(--hotPink);
@@ -40,10 +39,10 @@ function DashboardPage() {
   if (session) {
     return (
       <StyledDashboardPage>
+        <GuestList />
         <a href="/api/auth/signout" onClick={signOutHandler}>
           Sign Out
         </a>
-        <GuestList />
       </StyledDashboardPage>
     );
   }
