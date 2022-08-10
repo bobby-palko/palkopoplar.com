@@ -44,7 +44,7 @@ export const faqs = [
   {
     question: 'Gifts',
     answer: `<p style="text-align: center;">
-    In leiu of gifts, please make a donation to one of these organizations important to us:
+    In lieu of gifts, please make a donation to one of these organizations important to us:
     <div style="
       display: grid;
       grid-template-columns: 1fr 1fr;
