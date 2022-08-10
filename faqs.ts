@@ -61,8 +61,8 @@ export const faqs = [
         justify-self: center;
       ">
         <p style="font-size: 1.6rem;">
-          <a href="https://bvspca.org/donate/" target="_blank" style="color: var(--cream); font-size: 2.5rem;">Brandywine Valley SPCA</a><br>
-          Give to help provide food, shelter, and care to homeless animals across the area.
+          <a href="https://phillypaws.org/donate/" target="_blank" style="color: var(--cream); font-size: 2.5rem;">Philly PAWS</a><br>
+          Support rescue, foster programs, adoption, veterinary care, and more for the dogs and cats who need it most.
           <br>
 
         </p>
