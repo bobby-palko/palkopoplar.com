@@ -17,7 +17,8 @@ const GlobalStyles = createGlobalStyle`
     --green: rgba(104,139,15,1);
     --pink: rgba(219,39,106,1);
     --hotPink: rgba(255,81,185,1);
-    --maxWidth: 1000px;
+    --bgPink: rgba(219,39,106,0.5);
+    --maxWidth: 1200px;
   }
   html {
     background-color: var(--cream);
@@ -29,7 +30,7 @@ const GlobalStyles = createGlobalStyle`
     font-weight: 400;
     font-style: normal;
     font-size: 1.6rem;
-    word-spacing: 0.3rem;
+    word-spacing: 0.2em;
     margin: 0;
     padding: 0;
   }
@@ -52,7 +53,6 @@ const PageWrapper = styled.div`
 const InnerStyles = styled.div`
   max-width: var(--maxWidth);
   margin: 0 auto;
-  padding: 2rem;
 `;
 
 function Page({ children }: { children: React.ReactNode }) {

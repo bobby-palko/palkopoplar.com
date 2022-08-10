@@ -15,7 +15,14 @@
     "jsx": "preserve",
     "incremental": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": [
+    "next-env.d.ts",
+    "types/",
+    "**/*.ts",
+    "**/*.tsx",
+    "next.config.js",
+    "lib/dbConnect.js"
+  ],
   "exclude": ["node_modules"],
   "extends": "eslint-config-wesbos/tsconfig.json"
 }
