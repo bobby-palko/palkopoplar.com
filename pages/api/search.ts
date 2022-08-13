@@ -58,6 +58,12 @@ async function handler(
             party,
           });
         }
+      } else {
+        res.status(200).json({
+          success: true,
+          message: `We're excited to have you!`,
+          party,
+        });
       }
     }
   }
