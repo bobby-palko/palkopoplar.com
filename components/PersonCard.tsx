@@ -164,7 +164,8 @@ function PersonCard({ guest }: Props) {
               name="name-edit"
               type="text"
               id="name-edit"
-              placeholder="&nbsp;"
+              placeholder={guest.name === 'Guest' ? ' ' : ''}
+              value={guest.name === 'Guest' ? '' : guest.name}
             />
             <label className="allergies" htmlFor="name-edit">
               Name of this Guest
