@@ -139,7 +139,11 @@ function GuestList() {
               <tbody>
                 {attending.map((guest) => (
                   <tr key={guest.name}>
-                    <td>{guest.name}</td>
+                    <td>
+                      {guest.name}{' '}
+                      {guest.nameIsEditable &&
+                        ` - ${partnerName(guest.partnerId)}`}
+                    </td>
                     <td>{guest.allergies}</td>
                   </tr>
                 ))}
@@ -154,6 +158,7 @@ function GuestList() {
               <thead>
                 <tr>
                   <th>Name</th>
+                  <th>Notes</th>
                 </tr>
               </thead>
               <tbody>
@@ -164,6 +169,7 @@ function GuestList() {
                       {guest.nameIsEditable &&
                         ` - ${partnerName(guest.partnerId)}`}
                     </td>
+                    <td>{guest.allergies}</td>
                   </tr>
                 ))}
               </tbody>
