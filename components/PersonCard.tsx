@@ -153,6 +153,11 @@ function PersonCard({ guest }: Props) {
     setAllergies(event.currentTarget.value);
   };
 
+  const [name, setName] = useState(guest.name);
+  const updateName = (event: FormEvent<HTMLInputElement>) => {
+    setName(event.currentTarget.value);
+  };
+
   return (
     <StyledPersonCard>
       <h3>{guest.name}</h3>
@@ -164,8 +169,9 @@ function PersonCard({ guest }: Props) {
               name="name-edit"
               type="text"
               id="name-edit"
-              placeholder={guest.name === 'Guest' ? ' ' : ''}
-              value={guest.name === 'Guest' ? '' : guest.name}
+              placeholder={name === 'Guest' ? ' ' : ''}
+              value={name === 'Guest' ? '' : name}
+              onChange={updateName}
             />
             <label className="allergies" htmlFor="name-edit">
               Name of this Guest
