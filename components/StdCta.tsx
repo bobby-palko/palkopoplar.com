@@ -58,8 +58,8 @@ function StdCta() {
     <StyledStdCta>
       <h1>Bobby & Erin are getting married!</h1>
       <p>09.24.2022</p>
-      <Link href="/rsvp">
-        <StyledLink>RSVP</StyledLink>
+      <Link href="/info">
+        <StyledLink>Day of Info</StyledLink>
       </Link>
     </StyledStdCta>
   );

@@ -34,6 +34,7 @@ const StyledAccordionItem = styled.li.attrs((props) => ({
     display: flex;
     justify-content: space-between;
     align-items: center;
+    word-spacing: 0.33rem;
   }
 
   button span {
