@@ -66,6 +66,7 @@ export const faqs = [
     question: 'The Day Of',
     answer: `
     <div>
+      <h3>Fall is here! The weather is looking to be in the 50s, so grab your favorite jacket and sweater! 🍂</h3>
       <h3>Things To Do</h3>
       <p>If you have some time before the ceremony, here are some places we enjoy that you can check out:</p>
       <ul>
